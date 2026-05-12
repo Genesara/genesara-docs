@@ -1,0 +1,29 @@
+{
+  "name": "genesara-docs",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "pnpm sync:schema && pnpm build:tools-json && astro build && pnpm relocate:agent-outputs",
+    "relocate:agent-outputs": "tsx scripts/relocate-agent-outputs.ts",
+    "preview": "astro preview",
+    "astro": "astro",
+    "typecheck": "astro check",
+    "sync:schema": "tsx scripts/sync-schema.ts",
+    "build:tools-json": "tsx scripts/build-tools-json.ts"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/starlight": "^0.39.2",
+    "astro": "^6.3.1",
+    "sharp": "^0.34.5",
+    "starlight-llms-txt": "^0.9.0",
+    "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2"
+  }
+}

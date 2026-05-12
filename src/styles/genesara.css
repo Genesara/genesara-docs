@@ -1,0 +1,113 @@
+/* Genesara design tokens + Starlight overrides.
+   Source palette: paper-feel cartography. Three colors + paper tint. */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --gs-bg:       #0E0F12;
+  --gs-paper:    #1A1814;
+  --gs-text:     #E8E5DE;
+  --gs-text-dim: #9A968D;
+  --gs-accent:   #C8A35E;
+  --gs-accent-2: #d4b06a;
+  --gs-rule:     #2B2A26;
+
+  --gs-display: 'Fraunces', 'Times New Roman', serif;
+  --gs-body:    'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --gs-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+:root[data-theme='dark'] {
+  --sl-color-accent-low:  #2a2316;
+  --sl-color-accent:      var(--gs-accent);
+  --sl-color-accent-high: #e5c688;
+
+  --sl-color-white:    var(--gs-text);
+  --sl-color-gray-1:   var(--gs-text);
+  --sl-color-gray-2:   #cfcbc1;
+  --sl-color-gray-3:   #a8a39a;
+  --sl-color-gray-4:   var(--gs-text-dim);
+  --sl-color-gray-5:   #5a564f;
+  --sl-color-gray-6:   var(--gs-rule);
+  --sl-color-gray-7:   #1f1d19;
+  --sl-color-black:    var(--gs-bg);
+
+  --sl-color-bg:        var(--gs-bg);
+  --sl-color-bg-nav:    var(--gs-bg);
+  --sl-color-bg-sidebar: var(--gs-bg);
+  --sl-color-bg-inline-code: var(--gs-paper);
+  --sl-color-bg-accent:  var(--gs-accent);
+  --sl-color-hairline:   var(--gs-rule);
+  --sl-color-hairline-light: var(--gs-rule);
+  --sl-color-hairline-shade: var(--gs-rule);
+
+  --sl-color-text:        var(--gs-text);
+  --sl-color-text-accent: var(--gs-accent);
+  --sl-color-text-invert: var(--gs-bg);
+
+  --sl-font: var(--gs-body);
+  --sl-font-mono: var(--gs-mono);
+
+  --sl-shadow-sm: none;
+  --sl-shadow-md: none;
+  --sl-shadow-lg: none;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low:  #f4e9d2;
+  --sl-color-accent:      #9a7a3e;
+  --sl-color-accent-high: #5d4824;
+
+  --sl-color-white:    #1a1814;
+  --sl-color-gray-1:   #1a1814;
+  --sl-color-gray-2:   #2b2a26;
+  --sl-color-gray-3:   #4a4640;
+  --sl-color-gray-4:   #6a6660;
+  --sl-color-gray-5:   #8e897f;
+  --sl-color-gray-6:   #d6d2c8;
+  --sl-color-gray-7:   #ece8de;
+  --sl-color-black:    #faf8f3;
+
+  --sl-color-bg:        #faf8f3;
+  --sl-color-bg-nav:    #faf8f3;
+  --sl-color-bg-sidebar: #faf8f3;
+  --sl-color-bg-inline-code: #ece8de;
+  --sl-color-hairline:  #d6d2c8;
+
+  --sl-color-text:        #1a1814;
+  --sl-color-text-accent: #9a7a3e;
+
+  --sl-font: var(--gs-body);
+  --sl-font-mono: var(--gs-mono);
+
+  --sl-shadow-sm: none;
+  --sl-shadow-md: none;
+  --sl-shadow-lg: none;
+}
+
+body {
+  font-family: var(--gs-body);
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Display family for headings inside Starlight content */
+.sl-markdown-content :is(h1, h2, h3, h4) {
+  font-family: var(--gs-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Sharp corners across Starlight */
+.sl-markdown-content :is(pre, code, blockquote, table, .starlight-aside),
+.card, .button, [class*='content-panel'] {
+  border-radius: 2px !important;
+}
+
+/* Site title in nav uses display family */
+.site-title {
+  font-family: var(--gs-display);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}

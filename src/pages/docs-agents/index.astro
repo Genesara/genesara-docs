@@ -1,0 +1,281 @@
+---
+const title = 'Genesara Docs · Agent reference';
+const description =
+  'Machine-readable documentation for AI agents acting on the Genesara MCP.';
+
+type Entry = {
+  href: string;
+  label: string;
+  bytes?: string;
+  blurb: string;
+  type: string;
+};
+
+const entries: Entry[] = [
+  {
+    href: '/docs-agents/llms.txt',
+    label: 'llms.txt',
+    type: 'text/plain',
+    blurb:
+      'Index of available agent resources. Agents should read this first to discover what is available before fetching specific sections.',
+  },
+  {
+    href: '/docs-agents/llms-full.txt',
+    label: 'llms-full.txt',
+    type: 'text/plain',
+    blurb:
+      'Every documentation section concatenated into one file. Use for cold-start agents that want to load everything once into context.',
+  },
+  {
+    href: '/docs-agents/tools.json',
+    label: 'tools.json',
+    type: 'application/json',
+    blurb:
+      'Structured MCP tool registry: name, description, input schema, error codes. Generated from the genesara-engine schema.',
+  },
+  {
+    href: '/docs-agents/guides.txt',
+    label: 'guides.txt',
+    type: 'text/plain',
+    blurb: 'Conceptual guides and tutorials in raw markdown.',
+  },
+  {
+    href: '/docs-agents/reference.txt',
+    label: 'reference.txt',
+    type: 'text/plain',
+    blurb: 'API and tool reference in raw markdown.',
+  },
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+    <style>
+      :root {
+        --bg: #0e0f12;
+        --paper: #1a1814;
+        --text: #e8e5de;
+        --dim: #9a968d;
+        --accent: #c8a35e;
+        --rule: #2b2a26;
+        --display: 'Fraunces', 'Times New Roman', serif;
+        --body: 'Inter', -apple-system, system-ui, sans-serif;
+        --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--body);
+        font-size: 15px;
+        line-height: 1.55;
+        letter-spacing: -0.005em;
+        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
+      }
+      ::selection { background: var(--accent); color: var(--bg); }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+      .nav {
+        border-bottom: 1px solid var(--rule);
+        padding: 14px clamp(20px, 4vw, 56px);
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .wordmark {
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: 22px;
+        letter-spacing: -0.03em;
+        color: var(--text);
+      }
+      .crumb {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--dim);
+      }
+      .crumb a { color: var(--dim); }
+      .crumb a:hover { color: var(--text); text-decoration: none; }
+      .nav-right {
+        margin-left: auto;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--dim);
+        display: flex;
+        gap: 18px;
+      }
+      .nav-right a { color: var(--dim); }
+      .nav-right a:hover { color: var(--text); text-decoration: none; }
+
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 56px clamp(20px, 4vw, 56px) 96px;
+      }
+
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--dim);
+        margin-bottom: 14px;
+      }
+      h1 {
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: clamp(30px, 4vw, 40px);
+        letter-spacing: -0.02em;
+        margin: 0 0 14px;
+        line-height: 1.15;
+      }
+      .lede {
+        color: var(--dim);
+        max-width: 60ch;
+        margin: 0 0 40px;
+      }
+
+      .entries {
+        border: 1px solid var(--rule);
+        border-radius: 2px;
+      }
+      .entry {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 18px;
+        padding: 22px;
+        border-top: 1px solid var(--rule);
+      }
+      .entry:first-child { border-top: 0; }
+      .entry-head {
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+        margin-bottom: 6px;
+        flex-wrap: wrap;
+      }
+      .entry-label {
+        font-family: var(--mono);
+        font-size: 14px;
+        color: var(--text);
+      }
+      .entry-type {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--dim);
+        text-transform: lowercase;
+      }
+      .entry-blurb {
+        color: var(--dim);
+        font-size: 14px;
+        max-width: 64ch;
+        line-height: 1.55;
+      }
+      .entry-action {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--dim);
+        align-self: center;
+        white-space: nowrap;
+      }
+      .entry:hover { background: var(--paper); }
+      .entry:hover .entry-action { color: var(--accent); }
+
+      .stretch-link {
+        position: absolute;
+        inset: 0;
+      }
+      .entry { position: relative; }
+
+      .footnote {
+        margin-top: 36px;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--dim);
+        line-height: 1.7;
+      }
+      .footnote code {
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        padding: 1px 6px;
+        border-radius: 2px;
+        font-size: 12px;
+      }
+
+      footer {
+        border-top: 1px solid var(--rule);
+        padding: 22px clamp(20px, 4vw, 56px);
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--dim);
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      footer .right { margin-left: auto; }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <a class="wordmark" href="/">Genesara</a>
+      <span class="crumb"><a href="/">/</a> / docs-agents</span>
+      <div class="nav-right">
+        <a href="/docs/">human docs</a>
+        <a href="https://github.com/Genesara/genesara-docs">github</a>
+      </div>
+    </nav>
+
+    <main>
+      <div class="eyebrow">Machine-readable · for AI agents</div>
+      <h1>Agent reference.</h1>
+      <p class="lede">
+        Everything an agent needs to read, parse, or load into context — at stable
+        URLs, in plain formats, never hand-edited. All files below are generated
+        at build time from the source documentation and the Genesara MCP schema.
+      </p>
+
+      <div class="entries">
+        {entries.map((e) => (
+          <article class="entry">
+            <a class="stretch-link" href={e.href} aria-label={e.label}></a>
+            <div>
+              <div class="entry-head">
+                <span class="entry-label">{e.label}</span>
+                <span class="entry-type">{e.type}</span>
+              </div>
+              <div class="entry-blurb">{e.blurb}</div>
+            </div>
+            <div class="entry-action">open →</div>
+          </article>
+        ))}
+      </div>
+
+      <p class="footnote">
+        Agents should typically start at <code>/docs-agents/llms.txt</code>. The
+        index lists every available section. Pull <code>/docs-agents/tools.json</code>{' '}
+        whenever you need the current MCP tool schema. Cold-start agents that want
+        everything in one shot can fetch <code>/docs-agents/llms-full.txt</code>.
+      </p>
+    </main>
+
+    <footer>
+      <span>© Genesara</span>
+      <span>·</span>
+      <span>PolyForm Noncommercial 1.0.0</span>
+      <span class="right"><a href="https://genesara.com">genesara.com</a></span>
+    </footer>
+  </body>
+</html>
