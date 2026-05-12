@@ -11,9 +11,10 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 
 const REPO = 'Genesara/genesara-engine';
-const REF = 'main';
-const SCHEMA_PATH = 'schema/schema.json';
-const URL = `https://raw.githubusercontent.com/${REPO}/${REF}/${SCHEMA_PATH}`;
+// The engine publishes its tool schema as a GitHub Release asset on every
+// tagged release. We fetch the latest release's `schema.json`. To pin docs to
+// a specific engine version, swap `latest/download` for `download/<tag>`.
+const URL = `https://github.com/${REPO}/releases/latest/download/schema.json`;
 
 const out = resolve(process.cwd(), 'schema/schema.json');
 const fallback = resolve(process.cwd(), 'schema/schema.fallback.json');

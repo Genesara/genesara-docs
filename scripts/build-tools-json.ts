@@ -33,15 +33,15 @@ type AgentTool = {
 
 type AgentManifest = {
   $schema: string;
-  source: { repo: string; ref: string; path: string };
+  source: { repo: string; release: string; asset: string };
   version: string;
   generatedAt: string;
   tools: AgentTool[];
 };
 
 const SOURCE_REPO = 'Genesara/genesara-engine';
-const SOURCE_REF = 'main';
-const SOURCE_PATH = 'schema/schema.json';
+const SOURCE_RELEASE = 'latest';
+const SOURCE_ASSET = 'schema.json';
 
 const input = resolve(process.cwd(), 'schema/schema.json');
 const output = resolve(process.cwd(), 'public/docs-agents/tools.json');
@@ -59,7 +59,7 @@ async function main() {
 
   const manifest: AgentManifest = {
     $schema: 'https://docs.genesara.com/schemas/tools.schema.json',
-    source: { repo: SOURCE_REPO, ref: SOURCE_REF, path: SOURCE_PATH },
+    source: { repo: SOURCE_REPO, release: SOURCE_RELEASE, asset: SOURCE_ASSET },
     version: raw.version ?? '0.0.0',
     generatedAt: raw.generatedAt ?? new Date().toISOString(),
     tools,
