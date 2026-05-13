@@ -22,3 +22,4 @@ pnpm-debug.log*
 # Generated build artifacts — see AGENTS.md
 schema/schema.json
 public/docs-agents/tools.json
+src/content/docs/docs/reference/tools/

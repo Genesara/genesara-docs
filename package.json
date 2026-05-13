@@ -5,15 +5,17 @@
   "private": true,
   "packageManager": "pnpm@9.15.0",
   "scripts": {
+    "predev": "pnpm sync:schema && pnpm build:tool-pages",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "pnpm sync:schema && pnpm build:tools-json && astro build && pnpm relocate:agent-outputs",
+    "build": "pnpm sync:schema && pnpm build:tools-json && pnpm build:tool-pages && astro build && pnpm relocate:agent-outputs",
     "relocate:agent-outputs": "tsx scripts/relocate-agent-outputs.ts",
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "astro check",
     "sync:schema": "tsx scripts/sync-schema.ts",
-    "build:tools-json": "tsx scripts/build-tools-json.ts"
+    "build:tools-json": "tsx scripts/build-tools-json.ts",
+    "build:tool-pages": "tsx scripts/build-tool-pages.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
